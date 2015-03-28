@@ -11,7 +11,8 @@ int n;
 fill(int**);
 det(int**, int);
 print(int**);
-void main()
+
+main()
 {
 	int **matrix;
 	printf("enter n: ");
