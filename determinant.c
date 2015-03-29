@@ -26,6 +26,9 @@ main()
 	fill(matrix);
 	print(matrix);
 	printf("det = %d\n", det(matrix, n));
+	for (int i = 0; i < n; i++)
+		free(matrix[i]);
+	free(matrix);
 	return 0;
 }
 fill(int **matrix)
@@ -58,12 +61,16 @@ parity(x)
 {
 	return x % 2 ? -1 : 1;
 }
-int det(int **matrix, int n)
+det(int **matrix, int n)
 {
 	if (n == 1)
 		return matrix[0][0];
 	int sum = 0;
 	for (int i = 0; i < n; i++)
-		sum += parity(i) * (matrix[i][0]) * det(minor(matrix, i, n), n - 1);
+	{
+		int** m = minor(matrix, i, n);
+		sum += parity(i) * (matrix[i][0]) * det(m, n - 1);
+		free(m);
+	}
 	return sum;
 }
