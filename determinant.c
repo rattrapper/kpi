@@ -48,13 +48,9 @@ print(int **matrix)
 int** minor(int** matrix, int row, int n)
 {
 	int **res = malloc(sizeof(int*) * (n - 1));
-	for (int i = 0; i < n; i++)
-	{
-		if (i == row)
-			continue;
-		int k = i < row ? i : i - 1;
-		res[k] = matrix[i] + 1;
-	}
+	for (int i = 0, k = 0; i < n; i++)
+		if (i != row)
+			res[k++] = matrix[i] + 1;
 	return res;
 }
 parity(x)
